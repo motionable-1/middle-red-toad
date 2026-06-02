@@ -188,6 +188,8 @@
 
     .wordmark-inner {
       display: flex;
+      height: 120px;
+      align-items: center;
       overflow: hidden;
     }
 
@@ -240,14 +242,14 @@
     id="stage"
     data-composition-id="Main"
     data-start="0"
-    data-duration="10"
+    data-duration="3"
     data-width="1920"
     data-height="1080"
     data-motionabl-fps="30"
     data-motionabl-scenes='[
-      {"label": "Mark Build", "from": 0, "durationInFrames": 100},
-      {"label": "Wordmark", "from": 100, "durationInFrames": 100},
-      {"label": "Brand Hold", "from": 200, "durationInFrames": 100}
+      {"label": "Mark Build", "from": 0, "durationInFrames": 30},
+      {"label": "Wordmark", "from": 30, "durationInFrames": 30},
+      {"label": "Brand Hold", "from": 60, "durationInFrames": 30}
     ]'
   >
     
@@ -257,37 +259,37 @@
       src="https://pub-e3bfc0083b0644b296a7080b21024c5f.r2.dev/music/1780400772306_p6mr1cbwh9a_music_Sleek_high_tech_logo.mp3" 
       preload="auto" 
       data-start="0" 
-      data-duration="10" 
+      data-duration="3" 
       data-track-index="1" 
       data-volume="0.8"
     ></audio>
 
-    <!-- Track 2: Camera Eye Mechanical Activation / Lock-in SFX (Starts 0.4s to anticipation-build) -->
+    <!-- Track 2: Camera Eye Mechanical Activation / Lock-in SFX (Starts 0.1s to anticipation-build) -->
     <audio 
       src="https://pub-e3bfc0083b0644b296a7080b21024c5f.r2.dev/sfx/1780400782406_8466ttguuqb_sfx_futuristic_tech_camera_focus__.mp3" 
       preload="auto" 
-      data-start="0.3" 
-      data-duration="3.5" 
+      data-start="0.1" 
+      data-duration="2.0" 
       data-track-index="2" 
       data-volume="0.85"
     ></audio>
 
-    <!-- Track 3: Digital Wind Sweep SFX (Starts 3.1s to anticipate the wordmark reveal) -->
+    <!-- Track 3: Digital Wind Sweep SFX (Starts 0.9s to anticipate the wordmark reveal) -->
     <audio 
       src="https://pub-e3bfc0083b0644b296a7080b21024c5f.r2.dev/sfx/1780400791700_7rdgfq85f86_sfx_futuristic_electronic_sweep_wh.mp3" 
       preload="auto" 
-      data-start="3.1" 
-      data-duration="3.0" 
+      data-start="0.9" 
+      data-duration="1.8" 
       data-track-index="3" 
       data-volume="0.75"
     ></audio>
 
-    <!-- TRACK INDEX 0: BACKGROUND & LENS/MARK BUILDING LAYER (0s - 10s) -->
+    <!-- TRACK INDEX 0: BACKGROUND & LENS/MARK BUILDING LAYER (0s - 3s) -->
     <div
       id="mark-clip"
       class="clip"
       data-start="0"
-      data-duration="10"
+      data-duration="3"
       data-track-index="0"
     >
       <!-- Background and Glows -->
@@ -336,16 +338,16 @@
       </div>
     </div>
 
-    <!-- TRACK INDEX 1: WORDMARK REVEAL LAYER (3.33s - 10s) -->
+    <!-- TRACK INDEX 1: WORDMARK REVEAL LAYER (1.0s - 3.0s) -->
     <div
       id="wordmark-clip"
       class="clip"
-      data-start="3.333"
-      data-duration="6.667"
+      data-start="1.0"
+      data-duration="2.0"
       data-track-index="4"
     >
       <div class="wordmark-container">
-        <div class="wordmark-inner">
+        <div class="wordmark-inner" data-layout-allow-overflow="true">
           <span class="letter">R</span>
           <span class="letter">e</span>
           <span class="letter">v</span>
@@ -355,12 +357,12 @@
       </div>
     </div>
 
-    <!-- TRACK INDEX 2: TAGLINE HOLD LAYER (6.67s - 10s) -->
+    <!-- TRACK INDEX 2: TAGLINE HOLD LAYER (2.0s - 3.0s) -->
     <div
       id="tagline-clip"
       class="clip"
-      data-start="6.667"
-      data-duration="3.333"
+      data-start="2.0"
+      data-duration="1.0"
       data-track-index="5"
     >
       <div class="tagline-container">
@@ -379,64 +381,64 @@
     const timeline = gsap.timeline({ paused: true });
 
     // -------------------------------------------------------------
-    // SCENE 1: MARK BUILD (0.0s - 3.33s)
+    // SCENE 1: MARK BUILD (0.0s - 1.0s)
     // -------------------------------------------------------------
 
     // Initialize stroke-dash offsets for line draws (pathLength="1" setup)
     gsap.set(".bracket, .eye-ring", { strokeDasharray: 1, strokeDashoffset: 1 });
 
     // A. Corner Brackets "Piece Assemble" + "Stroke Draw" Animation
-    // Brackets draw in while swooping diagonally into position
-    timeline.from("#bracket-tl", { x: -85, y: -85, scale: 0.65, opacity: 0, duration: 1.1, ease: "back.out(1.8)" }, 0.0);
-    timeline.from("#bracket-tr", { x: 85, y: -85, scale: 0.65, opacity: 0, duration: 1.1, ease: "back.out(1.8)" }, 0.08);
-    timeline.from("#bracket-br", { x: 85, y: 85, scale: 0.65, opacity: 0, duration: 1.1, ease: "back.out(1.8)" }, 0.16);
-    timeline.from("#bracket-bl", { x: -85, y: 85, scale: 0.65, opacity: 0, duration: 1.1, ease: "back.out(1.8)" }, 0.24);
+    // Brackets draw in extremely fast and snap-settle
+    timeline.from("#bracket-tl", { x: -85, y: -85, scale: 0.65, opacity: 0, duration: 0.45, ease: "back.out(1.5)" }, 0.0);
+    timeline.from("#bracket-tr", { x: 85, y: -85, scale: 0.65, opacity: 0, duration: 0.45, ease: "back.out(1.5)" }, 0.03);
+    timeline.from("#bracket-br", { x: 85, y: 85, scale: 0.65, opacity: 0, duration: 0.45, ease: "back.out(1.5)" }, 0.06);
+    timeline.from("#bracket-bl", { x: -85, y: 85, scale: 0.65, opacity: 0, duration: 0.45, ease: "back.out(1.5)" }, 0.09);
 
-    timeline.to(".bracket", { strokeDashoffset: 0, duration: 1.25, ease: "power3.out" }, 0.0);
+    timeline.to(".bracket", { strokeDashoffset: 0, duration: 0.5, ease: "power3.out" }, 0.0);
 
     // B. Camera Iris / Circle Lens Draw-in
-    // Ring expands with a soft rebound at the mechanical snap threshold (0.8s)
-    timeline.to("#eye-ring", { strokeDashoffset: 0, duration: 1.15, ease: "power2.out" }, 0.72);
-    timeline.from("#eye-ring", { scale: 0.45, transformOrigin: "200px 200px", duration: 1.3, ease: "elastic.out(1, 0.62)" }, 0.72);
+    // Ring draws in swiftly with an energetic rebound at 0.25s
+    timeline.to("#eye-ring", { strokeDashoffset: 0, duration: 0.5, ease: "power2.out" }, 0.25);
+    timeline.from("#eye-ring", { scale: 0.45, transformOrigin: "200px 200px", duration: 0.6, ease: "elastic.out(1, 0.6)" }, 0.25);
 
     // C. Center Crescent Pupil Scale Up
-    timeline.from("#eye-pupil", { scale: 0, transformOrigin: "200px 200px", duration: 1.1, ease: "back.out(1.7)" }, 1.15);
+    timeline.from("#eye-pupil", { scale: 0, transformOrigin: "200px 200px", duration: 0.4, ease: "back.out(1.5)" }, 0.45);
 
-    // D. Ambient Background Life (Slow drifting orbs)
-    timeline.fromTo(".glow-1", { x: -30, y: -20 }, { x: 40, y: 30, duration: 5.0, yoyo: true, repeat: 1, ease: "sine.inOut" }, 0.0);
-    timeline.fromTo(".glow-2", { x: 30, y: 20 }, { x: -40, y: -30, duration: 5.0, yoyo: true, repeat: 1, ease: "sine.inOut" }, 0.0);
-    timeline.fromTo(".glow-3", { scale: 0.95 }, { scale: 1.15, opacity: 0.16, duration: 3.5, yoyo: true, repeat: 2, ease: "sine.inOut" }, 0.5);
+    // D. Ambient Background Life (Slow drifting orbs, scaled for shorter timeline)
+    timeline.fromTo(".glow-1", { x: -30, y: -20 }, { x: 40, y: 30, duration: 1.5, yoyo: true, repeat: 1, ease: "sine.inOut" }, 0.0);
+    timeline.fromTo(".glow-2", { x: 30, y: 20 }, { x: -40, y: -30, duration: 1.5, yoyo: true, repeat: 1, ease: "sine.inOut" }, 0.0);
+    timeline.fromTo(".glow-3", { scale: 0.95 }, { scale: 1.15, opacity: 0.16, duration: 1.5, yoyo: true, repeat: 1, ease: "sine.inOut" }, 0.0);
 
     // -------------------------------------------------------------
-    // SCENE 2: WORDMARK REVEAL (3.33s - 6.67s)
+    // SCENE 2: WORDMARK REVEAL (1.0s - 2.0s)
     // -------------------------------------------------------------
 
-    // A. Eye Logo Lockup Shift Upwards (Re-balancing the screen space)
+    // A. Eye Logo Lockup Shift Upwards (Re-balancing the screen space swiftly)
     timeline.to("#logo-container", {
       y: -116,
       scale: 0.86,
-      duration: 1.45,
+      duration: 0.5,
       ease: "power3.inOut"
-    }, 3.333);
+    }, 1.0);
 
-    // B. Wordmark Mask Reveal (Individual letters sliding up from mask)
+    // B. Wordmark Mask Reveal (Individual letters sliding up from mask, crisp stagger)
     timeline.from(".letter", {
       yPercent: 105,
       opacity: 0,
-      duration: 1.25,
-      stagger: 0.07,
+      duration: 0.45,
+      stagger: 0.03,
       ease: "power4.out"
-    }, 3.65);
+    }, 1.1);
 
     // C. Wordmark Kerning Settle (Animating spacing wide -> tight)
     timeline.from(".wordmark-inner", {
       letterSpacing: "0.22em",
-      duration: 1.75,
+      duration: 0.6,
       ease: "power3.out"
-    }, 3.65);
+    }, 1.1);
 
     // -------------------------------------------------------------
-    // SCENE 3: HOLD & GLOSS (6.67s - 10.0s)
+    // SCENE 3: HOLD & GLOSS (2.0s - 3.0s)
     // -------------------------------------------------------------
 
     // A. Subtext Tagline Reveal
@@ -444,16 +446,16 @@
       yPercent: 105,
       opacity: 0,
       letterSpacing: "0.58em",
-      duration: 1.35,
+      duration: 0.45,
       ease: "power3.out"
-    }, 6.667);
+    }, 2.0);
 
     // B. Light Sweep Gloss Pass (A diagonal glossy shine reflecting off the logo)
     timeline.to(".light-sweep", {
       backgroundPositionX: "-60%",
-      duration: 1.6,
+      duration: 0.6,
       ease: "power2.inOut"
-    }, 7.15);
+    }, 2.1);
 
     // Make the timeline accessible to the Hyperframes host
     window.__timelines.Main = timeline;
